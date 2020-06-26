@@ -1,5 +1,5 @@
 import React from 'react';
-import Hello from './modules/Hello/Hello.component'
+import Hello from './modules/Hello/components/Hello.component';
 
 
 interface HelloProps {
