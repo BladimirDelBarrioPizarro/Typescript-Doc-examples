@@ -27,7 +27,10 @@ it('Renders App without crashing', () => {
     ReactDOM.unmountComponentAtNode(div);
   }); 
 
-
+  it('contains classname App', () => {
+    const wrapper = Enzyme.shallow(<App />);
+    expect (wrapper.find('.App').exists()).toBe(true);
+  })
 
 
 describe('renders Hello component ', () => {
@@ -42,15 +45,17 @@ describe('renders Hello component ', () => {
         expect(wrapper).toMatchSnapshot()
       });
 
-      it("renders the correct text with an explicit enthusiasm level of 5", () => {
+      /* it("renders the correct text with an explicit enthusiasm level of 5", () => {
          const wrapper = Enzyme.shallow(
             <Provider store={store}> 
                 <Hello name="Bladi" enthusiasmLevel={5} />
             </Provider>
-        ).dive() 
-        //expect(wrapper.find(".greeting")).toEqual({})
-        //expect(wrapper.find(".greeting").text()).toEqual("Hello Bladi!!!!!");
-      }); 
+        ).dive()
+    
+        expect(wrapper.find(".greeting")).toEqual({})
+        expect (wrapper.find(".greeting").exists()).toBe(true);
+        expect(wrapper.find(".greeting").text()).toEqual("Hello Bladi!!!!!");
+      });  */
 
       it("throws when the enthusiasm level is 0", () => {
         expect(() => {
