@@ -28,7 +28,6 @@ const Hello = ({ name, enthusiasmLevel }: HelloProps) => {
           <div className="greeting">
             Hello {name + getExclamationMarks(enthusiasmLevel)}
           </div>
-          
            <button onClick={() => helloMessage(data)}>SEND</button>
         </div>
       );
