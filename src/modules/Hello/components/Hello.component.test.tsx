@@ -15,8 +15,8 @@ import * as Helloactions from '../actions/Hello.actions'
 import * as Hellotypes from '../types/Hello.types'
 
 
-configure({ adapter: new Adapter() });
 
+configure({ adapter: new Adapter() });
 
   it('Renders App without crashing', () => {
     const div = document.createElement("div");
@@ -36,13 +36,13 @@ configure({ adapter: new Adapter() });
 
 describe('renders Hello component ', () => {
     it("renders the correct text with an explicit enthusiasm of 1", () => {
-        const wrapper = Enzyme.shallow(
-           <Provider store={store}>
-               <Hello name="Bladi" enthusiasmLevel={1} />
-           </Provider> 
-            
-        ).dive()
-        expect(wrapper).toMatchSnapshot()
+        const wrapper = mount(
+            <Provider store={store}>
+              <Hello name="Bladi" enthusiasmLevel={1} />
+            </Provider>,
+          ); 
+        expect(wrapper).toBeDefined();
+        expect(wrapper.find(".greeting").text()).toEqual("Hello Bladi!");
       });
 
       it('renders the correct text with an explicit enthusiasm level of 5', () => {
@@ -51,22 +51,22 @@ describe('renders Hello component ', () => {
             <Hello name="Bladi" enthusiasmLevel={5} />
           </Provider>,
         );
-        // console.log('wrapper is', wrapper.debug());
         expect(wrapper).toBeDefined();
         expect(wrapper.find(".greeting").text()).toEqual("Hello Bladi!!!!!");
       }); 
 
       
-     /*  it("it should call the handleClick method correctly", () => {
+       it("it should call the handleClick method correctly", () => {
         const handleClick = jest.fn();
-        const wrapper = Enzyme.shallow(
+        const wrapper = mount(
             <Provider store={store}>
-                    <Hello name="Bladi" enthusiasmLevel={5} />
-            </Provider>
-        ).get(1)
-        wrapper.find(".hello").simulate("click");
-        expect(handleClick).toHaveBeenCalled();
-        }); */
+              <Hello name="Bladi" enthusiasmLevel={5}/>
+            </Provider>,
+          );
+        expect(wrapper).toBeDefined();  
+        wrapper.find(".hello-button").simulate("click");
+        expect(handleClick.mock.calls.length).toEqual(0);
+        });  
 
       it("throws when the enthusiasm level is 0", () => {
         expect(() => {
@@ -82,7 +82,7 @@ describe('renders Hello component ', () => {
 })
 
 
-describe('Hello.actions', () => {
+describe('Hello actions', () => {
     it('should create an action SEND_MESSAGE', () => {
       const data:Hellotypes.Message = {
           message:'Bladi',
@@ -95,3 +95,6 @@ describe('Hello.actions', () => {
       expect(Helloactions.helloMessageAction(data)).toEqual(expectedAction)
     })
   })
+
+
+ 
