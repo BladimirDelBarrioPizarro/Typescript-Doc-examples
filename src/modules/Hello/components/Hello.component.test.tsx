@@ -1,6 +1,7 @@
 import * as React from "react";
 import ReactDOM from 'react-dom';
 import * as Enzyme from "enzyme";
+import {mount} from 'enzyme'
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
@@ -17,7 +18,7 @@ import * as Hellotypes from '../types/Hello.types'
 configure({ adapter: new Adapter() });
 
 
-it('Renders App without crashing', () => {
+  it('Renders App without crashing', () => {
     const div = document.createElement("div");
     ReactDOM.render(
        <Provider store={store}> 
@@ -35,7 +36,6 @@ it('Renders App without crashing', () => {
 
 describe('renders Hello component ', () => {
     it("renders the correct text with an explicit enthusiasm of 1", () => {
-        
         const wrapper = Enzyme.shallow(
            <Provider store={store}>
                <Hello name="Bladi" enthusiasmLevel={1} />
@@ -45,17 +45,28 @@ describe('renders Hello component ', () => {
         expect(wrapper).toMatchSnapshot()
       });
 
-      /* it("renders the correct text with an explicit enthusiasm level of 5", () => {
-         const wrapper = Enzyme.shallow(
-            <Provider store={store}> 
-                <Hello name="Bladi" enthusiasmLevel={5} />
-            </Provider>
-        ).dive()
-    
-        expect(wrapper.find(".greeting")).toEqual({})
-        expect (wrapper.find(".greeting").exists()).toBe(true);
+      it('renders the correct text with an explicit enthusiasm level of 5', () => {
+        const wrapper = mount(
+          <Provider store={store}>
+            <Hello name="Bladi" enthusiasmLevel={5} />
+          </Provider>,
+        );
+        // console.log('wrapper is', wrapper.debug());
+        expect(wrapper).toBeDefined();
         expect(wrapper.find(".greeting").text()).toEqual("Hello Bladi!!!!!");
-      });  */
+      }); 
+
+      
+     /*  it("it should call the handleClick method correctly", () => {
+        const handleClick = jest.fn();
+        const wrapper = Enzyme.shallow(
+            <Provider store={store}>
+                    <Hello name="Bladi" enthusiasmLevel={5} />
+            </Provider>
+        ).get(1)
+        wrapper.find(".hello").simulate("click");
+        expect(handleClick).toHaveBeenCalled();
+        }); */
 
       it("throws when the enthusiasm level is 0", () => {
         expect(() => {
