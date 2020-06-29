@@ -29,6 +29,18 @@ describe('renders Hello component ', () => {
         ).dive()
         expect(wrapper).toMatchSnapshot()
       });
+
+      it("throws when the enthusiasm level is 0", () => {
+        expect(() => {
+          Enzyme.shallow(<Hello name="Bladi" enthusiasmLevel={0} />);
+        }).toThrow();
+      });
+      
+      it("throws when the enthusiasm level is negative", () => {
+        expect(() => {
+          Enzyme.shallow(<Hello name="Bladi" enthusiasmLevel={-1} />);
+        }).toThrow();
+      }); 
 })
 
 
