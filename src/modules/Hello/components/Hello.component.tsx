@@ -5,7 +5,7 @@ export interface HelloProps {
   enthusiasmLevel: number;
 }
 
-const Hello = ({ name, enthusiasmLevel  }: HelloProps) => {
+const Hello = ({ name, enthusiasmLevel }: HelloProps) => {
     if (enthusiasmLevel <= 0) {
         throw new Error('You could be a little more enthusiastic. :D');
       }
