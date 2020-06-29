@@ -1,7 +1,7 @@
 export const SEND_MESSAGE = 'SEND_MESSAGE'
 
 export interface Message {
-    type: string;
+    message: string;
     enthusiasmLevel: number
   }
 
