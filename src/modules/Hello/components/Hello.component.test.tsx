@@ -9,7 +9,7 @@ import store from '../../../store/store'
 import Hello from "./Hello.component";
 import * as Helloactions from '../actions/Hello.actions'
 import * as Hellotypes from '../types/Hello.types'
-import { render } from "@testing-library/react";
+
 
 configure({ adapter: new Adapter() });
 
@@ -30,6 +30,15 @@ describe('renders Hello component ', () => {
         expect(wrapper).toMatchSnapshot()
       });
 
+      /* it("renders the correct text with an explicit enthusiasm level of 5", () => {
+        const hello = Enzyme.shallow(
+            <Provider store={store}> 
+                <Hello name="Bladi" enthusiasmLevel={5} />
+            </Provider>
+        );
+        expect(hello.find(".greeting").text()).toEqual("Hello Bladi!!!!!");
+      }); */
+
       it("throws when the enthusiasm level is 0", () => {
         expect(() => {
           Enzyme.shallow(<Hello name="Bladi" enthusiasmLevel={0} />);
@@ -43,25 +52,6 @@ describe('renders Hello component ', () => {
       }); 
 })
 
-
-/*
-it("renders the correct text with an explicit enthusiasm level of 5", () => {
-  const hello = Enzyme.shallow(<Hello name="Bladi" enthusiasmLevel={5} />);
-  expect(hello.find(".greeting").text()).toEqual("Hello Bladi!!!!!");
-});
-
-it("throws when the enthusiasm level is 0", () => {
-  expect(() => {
-    Enzyme.shallow(<Hello name="Bladi" enthusiasmLevel={0} />);
-  }).toThrow();
-});
-
-it("throws when the enthusiasm level is negative", () => {
-  expect(() => {
-    Enzyme.shallow(<Hello name="Bladi" enthusiasmLevel={-1} />);
-  }).toThrow();
-});
- */
 
 describe('Hello.actions', () => {
     it('should create an action SEND_MESSAGE', () => {
